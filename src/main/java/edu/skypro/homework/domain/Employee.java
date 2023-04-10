@@ -6,7 +6,7 @@ import java.util.Objects;
 public class Employee {
     private final String firstName;
     private final String lastName;
-    private double salary;
+    private double salary; // todo переделать на BigDecimal
     private int department;
 
     public Employee(String firstName, String lastName, double salary, int department) {
