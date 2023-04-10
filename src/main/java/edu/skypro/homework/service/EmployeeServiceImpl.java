@@ -7,10 +7,15 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.stream.Stream;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
     private final Map<String, Employee> employees;
+
+    public Map<String, Employee> getEmployees() {
+        return Collections.unmodifiableMap(employees);
+    }
 
     public EmployeeServiceImpl() {
         this.employees = new HashMap<>();

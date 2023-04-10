@@ -14,3 +14,7 @@ GET http://localhost:8080/employee/find?firstName=Ivan&lastName=Petrov&salary=0&
 ###
 
 GET http://localhost:8080/employee
+###
+
+GET http://localhost:8080/department/max-salary?departmentId=1
+###
