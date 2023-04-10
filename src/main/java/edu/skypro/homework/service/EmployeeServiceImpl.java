@@ -5,6 +5,7 @@ import edu.skypro.homework.exceptions.EmployeeAlreadyAddedException;
 import edu.skypro.homework.exceptions.EmployeeNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 @Service
@@ -15,30 +16,34 @@ public class EmployeeServiceImpl implements EmployeeService {
         this.employees = new HashMap<>();
     }
 
+    private String getKey(Employee employee) {
+        return employee.getFirstName() + " " + employee.getLastName();
+    }
+
     @Override
-    public Employee add(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
-        if (employees.containsKey(employee.getFullName())) {
+    public Employee add(String firstName, String lastName, double salary, int department) {
+        Employee employee = new Employee(firstName, lastName, salary, department);
+        if (employees.containsKey(getKey(employee))) {
             throw new EmployeeAlreadyAddedException();
         }
-        employees.put(employee.getFullName(), employee);
+        employees.put(getKey(employee), employee);
         return employee;
     }
 
     @Override
-    public Employee remove(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
-        if (employees.containsKey(employee.getFullName())) {
-            return employees.remove(employee.getFullName());
+    public Employee remove(String firstName, String lastName, double salary, int department) {
+        Employee employee = new Employee(firstName, lastName, salary, department);
+        if (employees.containsKey(getKey(employee))) {
+            return employees.remove(getKey(employee));
         }
         throw new EmployeeNotFoundException();
     }
 
     @Override
-    public Employee find(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
-        if (employees.containsKey(employee.getFullName())) {
-            return employees.get(employee.getFullName());
+    public Employee find(String firstName, String lastName, double salary, int department) {
+        Employee employee = new Employee(firstName, lastName, salary, department);
+        if (employees.containsKey(getKey(employee))) {
+            return employees.get(getKey(employee));
         }
         throw new EmployeeNotFoundException();
     }

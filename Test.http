@@ -1,14 +1,16 @@
-GET http://localhost:8080/employee/add?firstName=Ivan&lastName=Ivanov
+GET http://localhost:8080/employee/add?firstName=Ivan&lastName=Ivanov&salary=30000&department=1
 ###
 
-GET http://localhost:8080/employee/add?firstName=Ivan&lastName=Petrov
+GET http://localhost:8080/employee/add?firstName=Ivan&lastName=Petrov&salary=35000&department=1
 ###
 
-GET http://localhost:8080/employee/remove?firstName=Ivan&lastName=Ivanov
+GET http://localhost:8080/employee/remove?firstName=Ivan&lastName=Ivanov&salary=0&department=0
 ###
 
-GET http://localhost:8080/employee/find?firstName=Ivan&lastName=Ivanov
+GET http://localhost:8080/employee/find?firstName=Ivan&lastName=Ivanov&salary=0&department=0
 ###
 
-GET http://localhost:8080/employee/find?firstName=Ivan&lastName=Petrov
+GET http://localhost:8080/employee/find?firstName=Ivan&lastName=Petrov&salary=0&department=0
 ###
+
+GET http://localhost:8080/employee

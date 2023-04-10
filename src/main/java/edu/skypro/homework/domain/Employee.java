@@ -1,14 +1,19 @@
 package edu.skypro.homework.domain;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Employee {
-    private String firstName;
-    private String lastName;
+    private final String firstName;
+    private final String lastName;
+    private double salary;
+    private int department;
 
-    public Employee(String firstName, String lastName) {
+    public Employee(String firstName, String lastName, double salary, int department) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.salary = salary;
+        this.department = department;
     }
 
     public String getFirstName() {
@@ -19,13 +24,20 @@ public class Employee {
         return lastName;
     }
 
-    public String getFullName() {
-        return firstName + " " + lastName;
+    public double getSalary() {
+        return salary;
     }
+
+    public int getDepartment() {return department;}
 
     @Override
     public String toString() {
-        return getFullName();
+        return String.format(
+                "ФИО - %s; Оклад - %.2f; Отдел - %d",
+                firstName + " " + lastName,
+                salary,
+                department
+        );
     }
 
     @Override
