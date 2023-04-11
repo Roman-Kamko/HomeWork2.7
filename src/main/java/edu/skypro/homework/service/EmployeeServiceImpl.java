@@ -5,6 +5,7 @@ import edu.skypro.homework.exceptions.EmployeeAlreadyAddedException;
 import edu.skypro.homework.exceptions.EmployeeNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -27,7 +28,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee add(String firstName, String lastName, double salary, int department) {
+    public Employee add(String firstName, String lastName, BigDecimal salary, int department) {
         Employee employee = new Employee(firstName, lastName, salary, department);
         if (employees.containsKey(getKey(employee))) {
             throw new EmployeeAlreadyAddedException();
@@ -37,7 +38,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee remove(String firstName, String lastName, double salary, int department) {
+    public Employee remove(String firstName, String lastName, BigDecimal salary, int department) {
         Employee employee = new Employee(firstName, lastName, salary, department);
         if (employees.containsKey(getKey(employee))) {
             return employees.remove(getKey(employee));
@@ -46,7 +47,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee find(String firstName, String lastName, double salary, int department) {
+    public Employee find(String firstName, String lastName, BigDecimal salary, int department) {
         Employee employee = new Employee(firstName, lastName, salary, department);
         if (employees.containsKey(getKey(employee))) {
             return employees.get(getKey(employee));
