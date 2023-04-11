@@ -12,38 +12,38 @@ import java.util.Collection;
 @RestController
 @RequestMapping(value = "/employee")
 public class EmployeeController {
-    private final EmployeeService employeeService;
+    private final EmployeeService emplService;
 
-    public EmployeeController(EmployeeService employeeService) {
-        this.employeeService = employeeService;
+    public EmployeeController(EmployeeService emplService) {
+        this.emplService = emplService;
     }
 
     @GetMapping(path = "/add")
-    public Employee addEmployee(@RequestParam String firstName,
-                                @RequestParam String lastName,
-                                @RequestParam double salary,
-                                @RequestParam int department) {
-        return employeeService.add(firstName, lastName, salary, department);
+    public Employee add(@RequestParam String firstName,
+                        @RequestParam String lastName,
+                        @RequestParam double salary,
+                        @RequestParam int department) {
+        return emplService.add(firstName, lastName, salary, department);
     }
 
     @GetMapping(path = "/remove")
-    public Employee removeEmployee(@RequestParam String firstName,
-                                   @RequestParam String lastName,
-                                   @RequestParam double salary,
-                                   @RequestParam int department) {
-        return employeeService.remove(firstName, lastName, salary, department);
+    public Employee remove(@RequestParam String firstName,
+                           @RequestParam String lastName,
+                           @RequestParam double salary,
+                           @RequestParam int department) {
+        return emplService.remove(firstName, lastName, salary, department);
     }
 
     @GetMapping(path = "/find")
-    public Employee findEmployee(@RequestParam String firstName,
-                                 @RequestParam String lastName,
-                                 @RequestParam double salary,
-                                 @RequestParam int department) {
-        return employeeService.find(firstName, lastName, salary, department);
+    public Employee find(@RequestParam String firstName,
+                         @RequestParam String lastName,
+                         @RequestParam double salary,
+                         @RequestParam int department) {
+        return emplService.find(firstName, lastName, salary, department);
     }
 
     @GetMapping
-    public Collection<Employee> printEmployeeList() {
-        return employeeService.printAll();
+    public Collection<Employee> printAll() {
+        return emplService.printAll();
     }
 }

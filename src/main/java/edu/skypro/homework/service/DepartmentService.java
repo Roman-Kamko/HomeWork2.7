@@ -2,15 +2,14 @@ package edu.skypro.homework.service;
 
 import edu.skypro.homework.domain.Employee;
 
-import java.util.Collections;
-import java.util.Map;
+import java.util.Collection;
 
 public interface DepartmentService {
-    Employee findMaxSalaryInDepartment(int department);
+    Employee findMaxSalaryFromDepartment(int department);
 
-    Employee findMinSalaryInDepartment(Map<String, Employee> employeeMap, int department);
+    Employee findMinSalaryFromDepartment(int department);
 
-    Collections printAllFromDepartment(Map<String, Employee> employeeMap, int department);
+    Collection<Employee> printAllFromDepartment(int department);
 
-    Collections sortedPrintAll(Map<String, Employee> employeeMap);
+    Collection<Employee> printAllSortedByDepartment();
 }

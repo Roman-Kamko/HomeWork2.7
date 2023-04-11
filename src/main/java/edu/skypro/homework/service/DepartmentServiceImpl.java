@@ -3,39 +3,49 @@ package edu.skypro.homework.service;
 import edu.skypro.homework.domain.Employee;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
-    private EmployeeServiceImpl employeeServiceImpl;
+    private final EmployeeServiceImpl employeeServiceImpl;
 
     public DepartmentServiceImpl(EmployeeServiceImpl employeeServiceImpl) {
         this.employeeServiceImpl = employeeServiceImpl;
     }
 
     @Override
-    public Employee findMaxSalaryInDepartment(int department) {
-        List<Employee> employeeList = List.copyOf(employeeServiceImpl.getEmployees().values());
-        return employeeList.stream()
+    public Employee findMaxSalaryFromDepartment(int department) {
+        List<Employee> emplList = List.copyOf(employeeServiceImpl.getEmployees().values());
+        return emplList.stream()
                 .filter(employee -> employee.getDepartment() == department)
-                .max(Comparator.comparing(Employee::getSalary)).orElse(null);
+                .max(Comparator.comparing(Employee::getSalary))
+                .orElse(null);
     }
 
     @Override
-    public Employee findMinSalaryInDepartment(Map<String, Employee> employeeMap, int department) {
-        return null;
+    public Employee findMinSalaryFromDepartment(int department) {
+        List<Employee> emplList = List.copyOf(employeeServiceImpl.getEmployees().values());
+        return emplList.stream()
+                .filter(employee -> employee.getDepartment() == department)
+                .min(Comparator.comparing(Employee::getSalary))
+                .orElse(null);
     }
 
     @Override
-    public Collections printAllFromDepartment(Map<String, Employee> employeeMap, int department) {
-        return null;
+    public Collection<Employee> printAllFromDepartment(int department) {
+        List<Employee> emplList = List.copyOf(employeeServiceImpl.getEmployees().values());
+        return emplList.stream()
+                .filter(employee -> employee.getDepartment() == department)
+                .toList();
     }
 
     @Override
-    public Collections sortedPrintAll(Map<String, Employee> employeeMap) {
-        return null;
+    public Collection<Employee> printAllSortedByDepartment() {
+        List<Employee> emplList = List.copyOf(employeeServiceImpl.getEmployees().values());
+        return emplList.stream()
+                .sorted(Comparator.comparing(Employee::getDepartment))
+                .toList();
     }
 }

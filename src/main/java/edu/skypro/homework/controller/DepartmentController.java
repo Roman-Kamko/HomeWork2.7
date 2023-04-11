@@ -7,17 +7,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collection;
+
 @RestController
 @RequestMapping(value = "/department")
 public class DepartmentController {
-    private final DepartmentService departmentService;
+    private final DepartmentService depService;
 
-    public DepartmentController(DepartmentService departmentService) {
-        this.departmentService = departmentService;
+    public DepartmentController(DepartmentService depService) {
+        this.depService = depService;
     }
 
     @GetMapping(path = "/max-salary")
-    public Employee findMaxSalaryInDepartment(@RequestParam int departmentId) {
-        return departmentService.findMaxSalaryInDepartment(departmentId);
+    public Employee findMaxSalaryFromDepartment(@RequestParam int departmentId) {
+        return depService.findMaxSalaryFromDepartment(departmentId);
+    }
+
+    @GetMapping(path = "/min-salary")
+    public Employee findMinSalaryFromDepartment(@RequestParam int departmentId) {
+        return depService.findMinSalaryFromDepartment(departmentId);
+    }
+
+    @GetMapping(path = "/all")
+    public Collection<Employee> printAllFromDepartment(int departmentId) {
+        return depService.printAllFromDepartment(departmentId);
+    }
+
+    @GetMapping(path = "/all-sorted")
+    public Collection<Employee> printAllSortedByDepartment() {
+        return depService.printAllSortedByDepartment();
     }
 }
