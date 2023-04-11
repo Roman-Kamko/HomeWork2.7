@@ -29,7 +29,7 @@ public class DepartmentController {
     }
 
     @GetMapping(path = "/all")
-    public Collection<Employee> printAllFromDepartment(int departmentId) {
+    public Collection<Employee> printAllFromDepartment(@RequestParam int departmentId) {
         return depService.printAllFromDepartment(departmentId);
     }
 
