@@ -17,8 +17,8 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Employee findMaxSalaryFromDepartment(int department) {
-        List<Employee> emplList = List.copyOf(employeeServiceImpl.getEmployees().values());
-        return emplList.stream()
+        return employeeServiceImpl.getEmployees().values()
+                .stream()
                 .filter(employee -> employee.getDepartment() == department)
                 .max(Comparator.comparing(Employee::getSalary))
                 .orElse(null);
@@ -26,8 +26,8 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Employee findMinSalaryFromDepartment(int department) {
-        List<Employee> emplList = List.copyOf(employeeServiceImpl.getEmployees().values());
-        return emplList.stream()
+        return employeeServiceImpl.getEmployees().values()
+                .stream()
                 .filter(employee -> employee.getDepartment() == department)
                 .min(Comparator.comparing(Employee::getSalary))
                 .orElse(null);
@@ -35,16 +35,16 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Collection<Employee> printAllFromDepartment(int department) {
-        List<Employee> emplList = List.copyOf(employeeServiceImpl.getEmployees().values());
-        return emplList.stream()
+        return employeeServiceImpl.getEmployees().values()
+                .stream()
                 .filter(employee -> employee.getDepartment() == department)
                 .toList();
     }
 
     @Override
     public Collection<Employee> printAllSortedByDepartment() {
-        List<Employee> emplList = List.copyOf(employeeServiceImpl.getEmployees().values());
-        return emplList.stream()
+        return employeeServiceImpl.getEmployees().values()
+                .stream()
                 .sorted(Comparator.comparing(Employee::getDepartment))
                 .toList();
     }

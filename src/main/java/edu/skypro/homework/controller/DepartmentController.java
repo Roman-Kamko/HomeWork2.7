@@ -29,12 +29,10 @@ public class DepartmentController {
     }
 
     @GetMapping(path = "/all")
-    public Collection<Employee> printAllFromDepartment(@RequestParam int departmentId) {
+    public Collection<Employee> printAllFromDepartment(@RequestParam(required = false) Integer departmentId) {
+        if (departmentId == null) {
+            return depService.printAllSortedByDepartment();
+        }
         return depService.printAllFromDepartment(departmentId);
-    }
-
-    @GetMapping(path = "/all-sorted")
-    public Collection<Employee> printAllSortedByDepartment() {
-        return depService.printAllSortedByDepartment();
     }
 }
