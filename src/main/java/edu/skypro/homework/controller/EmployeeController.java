@@ -7,37 +7,44 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 
 @RestController
 @RequestMapping(value = "/employee")
 public class EmployeeController {
-    private final EmployeeService employeeService;
+    private final EmployeeService emplService;
 
-    public EmployeeController(EmployeeService employeeService) {
-        this.employeeService = employeeService;
+    public EmployeeController(EmployeeService emplService) {
+        this.emplService = emplService;
     }
 
     @GetMapping(path = "/add")
-    public Employee addEmployee(@RequestParam String firstName,
-                                @RequestParam String lastName) {
-        return employeeService.add(firstName, lastName);
+    public Employee add(@RequestParam String firstName,
+                        @RequestParam String lastName,
+                        @RequestParam BigDecimal salary,
+                        @RequestParam int department) {
+        return emplService.add(firstName, lastName, salary, department);
     }
 
     @GetMapping(path = "/remove")
-    public Employee rempveEmployee(@RequestParam String firstName,
-                                   @RequestParam String lastName) {
-        return employeeService.remove(firstName, lastName);
+    public Employee remove(@RequestParam String firstName,
+                           @RequestParam String lastName,
+                           @RequestParam BigDecimal salary,
+                           @RequestParam int department) {
+        return emplService.remove(firstName, lastName, salary, department);
     }
 
     @GetMapping(path = "/find")
-    public Employee findEmployee(@RequestParam String firstName,
-                                 @RequestParam String lastName) {
-        return employeeService.find(firstName, lastName);
+    public Employee find(@RequestParam String firstName,
+                         @RequestParam String lastName,
+                         @RequestParam BigDecimal salary,
+                         @RequestParam int department) {
+        return emplService.find(firstName, lastName, salary, department);
     }
 
     @GetMapping
-    public Collection<Employee> printEmployeeList() {
-        return employeeService.printAll();
+    public Collection<Employee> printAll() {
+        return emplService.printAll();
     }
 }

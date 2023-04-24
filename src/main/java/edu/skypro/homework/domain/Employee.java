@@ -1,14 +1,20 @@
 package edu.skypro.homework.domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 
 public class Employee {
-    private String firstName;
-    private String lastName;
+    private final String firstName;
+    private final String lastName;
+    private BigDecimal salary;
+    private int department;
 
-    public Employee(String firstName, String lastName) {
+    public Employee(String firstName, String lastName, BigDecimal salary, int department) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.salary = new BigDecimal(String.valueOf(salary));
+        this.department = department;
     }
 
     public String getFirstName() {
@@ -19,13 +25,20 @@ public class Employee {
         return lastName;
     }
 
-    public String getFullName() {
-        return firstName + " " + lastName;
+    public BigDecimal getSalary() {
+        return salary.setScale(2, RoundingMode.HALF_UP);
     }
+
+    public int getDepartment() {return department;}
 
     @Override
     public String toString() {
-        return getFullName();
+        return String.format(
+                "ФИО - %s; Оклад - %.2f; Отдел - %d",
+                firstName + " " + lastName,
+                salary,
+                department
+        );
     }
 
     @Override
