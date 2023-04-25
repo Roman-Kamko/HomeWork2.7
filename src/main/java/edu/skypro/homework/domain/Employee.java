@@ -1,8 +1,12 @@
 package edu.skypro.homework.domain;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
+
+import static org.apache.commons.lang3.StringUtils.*;
 
 public class Employee {
     private final String firstName;
@@ -11,8 +15,8 @@ public class Employee {
     private int department;
 
     public Employee(String firstName, String lastName, BigDecimal salary, int department) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstName = capitalize(firstName.toLowerCase());
+        this.lastName = capitalize(lastName.toLowerCase());
         this.salary = new BigDecimal(String.valueOf(salary));
         this.department = department;
     }
@@ -46,11 +50,14 @@ public class Employee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return firstName.equals(employee.firstName) && lastName.equals(employee.lastName);
+        return department == employee.department &&
+                Objects.equals(firstName, employee.firstName) &&
+                Objects.equals(lastName, employee.lastName) &&
+                Objects.equals(salary, employee.salary);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName);
+        return Objects.hash(firstName, lastName, salary, department);
     }
 }
