@@ -1,6 +1,7 @@
 package edu.skypro.homework.service;
 
 import edu.skypro.homework.domain.Employee;
+import edu.skypro.homework.exceptions.EmployeeNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -17,34 +18,30 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Employee findMaxSalaryFromDepartment(int department) {
-        return employeeServiceImpl.getEmployees().values()
-                .stream()
+        return employeeServiceImpl.getEmployees().stream()
                 .filter(employee -> employee.getDepartment() == department)
                 .max(Comparator.comparing(Employee::getSalary))
-                .orElse(null);
+                .orElseThrow(EmployeeNotFoundException::new);
     }
 
     @Override
     public Employee findMinSalaryFromDepartment(int department) {
-        return employeeServiceImpl.getEmployees().values()
-                .stream()
+        return employeeServiceImpl.getEmployees().stream()
                 .filter(employee -> employee.getDepartment() == department)
                 .min(Comparator.comparing(Employee::getSalary))
-                .orElse(null);
+                .orElseThrow(EmployeeNotFoundException::new);
     }
 
     @Override
     public Collection<Employee> printAllFromDepartment(int department) {
-        return employeeServiceImpl.getEmployees().values()
-                .stream()
+        return employeeServiceImpl.getEmployees().stream()
                 .filter(employee -> employee.getDepartment() == department)
                 .toList();
     }
 
     @Override
     public Collection<Employee> printAllSortedByDepartment() {
-        return employeeServiceImpl.getEmployees().values()
-                .stream()
+        return employeeServiceImpl.getEmployees().stream()
                 .sorted(Comparator.comparing(Employee::getDepartment))
                 .toList();
     }
